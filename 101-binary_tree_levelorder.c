@@ -19,12 +19,13 @@ size_t binary_tree_height(const binary_tree_t *tree)
 }
 
 /**
- * binary_tree_level_traversal - Recursively traverses a binary tree level by level
+ * binary_tree_level_traversal - Recursively traverses tree level by level
  * @tree: Pointer to the root node of the tree
  * @level: Current level being traversed
  * @func: Pointer to a function to call for each node
  */
-void binary_tree_level_traversal(const binary_tree_t *tree, size_t level, void (*func)(int))
+void binary_tree_level_traversal(const binary_tree_t *tree,
+		size_t level, void (*func)(int))
 {
 	if (tree == NULL)
 		return;
