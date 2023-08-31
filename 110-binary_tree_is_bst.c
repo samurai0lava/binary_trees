@@ -6,8 +6,7 @@
  * @tree: Pointer to the root of the binary tree
  * @lower_bound: The lower bound for node values in the subtree
  * @upper_bound: The upper bound for node values in the subtree
- *
- * @return: 1 if the tree is a valid BST, 0 otherwise.
+ * Return: 1 if the tree is a valid BST, 0 otherwise.
  */
 int binary_tree_is_bst_helper(const binary_tree_t *tree,
 		int lower_bound, int upper_bound)
@@ -15,11 +14,11 @@ int binary_tree_is_bst_helper(const binary_tree_t *tree,
 	if (tree == NULL)
 		return (1);
 
-	if (tree->n <= lower_bound || tree->n >= upper_bound)
+	if (tree->n < lower_bound || tree->n > upper_bound)
 		return (0);
 
-	return (binary_tree_is_bst_helper(tree->left, lower_bound, tree->n) &&
-			binary_tree_is_bst_helper(tree->right, tree->n,
+	return (binary_tree_is_bst_helper(tree->left, lower_bound, tree->n - 1) &&
+			binary_tree_is_bst_helper(tree->right, tree->n + 1,
 				upper_bound));
 }
 
@@ -30,5 +29,7 @@ int binary_tree_is_bst_helper(const binary_tree_t *tree,
  */
 int binary_tree_is_bst(const binary_tree_t *tree)
 {
+	if (!tree)
+		return (0);
 	return (binary_tree_is_bst_helper(tree, INT_MIN, INT_MAX));
 }
