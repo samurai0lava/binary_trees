@@ -7,46 +7,37 @@
  * @value: The value to be inserted into the BST
  *
  * Return: A pointer to the newly created node, or NULL on failure
- * or if value already exists.
+ *         or if value already exists.
  */
 bst_t *bst_insert(bst_t **tree, int value)
 {
-	bst_t *current = NULL;
-	bst_t *parent = NULL;
-	bst_t *new_node = NULL;
-
 	if (tree == NULL)
 		return (NULL);
+
 	if (*tree == NULL)
 	{
 		*tree = binary_tree_node(NULL, value);
-		if (*tree == NULL)
-			return (NULL);
 		return (*tree);
 	}
-	current = *tree;
-	while (current)
+
+	if (value < (*tree)->n)
 	{
-		parent = current;
-		if (value < current->n)
-			current = current->left;
-		else if (value > current->n)
-			current = current->right;
-		else if (value == current->n)
-			return (NULL);
+		if ((*tree)->left == NULL)
+		{
+			(*tree)->left = binary_tree_node(*tree, value);
+			return ((*tree)->left);
+		}
+		return (bst_insert(&((*tree)->left), value));
 	}
-	new_node = binary_tree_node(NULL, value);
-	if (parent == NULL)
-		return (*tree = new_node);
-	else if (value < parent->n)
+	else if (value > (*tree)->n)
 	{
-		parent->left = new_node;
-		new_node->parent = parent;
+		if ((*tree)->right == NULL)
+		{
+			(*tree)->right = binary_tree_node(*tree, value);
+			return ((*tree)->right);
+		}
+		return (bst_insert(&((*tree)->right), value));
 	}
-	else
-	{
-		parent->right = new_node;
-		new_node->parent = parent;
-	}
-	return (new_node);
+
+	return (NULL);
 }
