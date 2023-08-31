@@ -43,4 +43,10 @@ binary_tree_t *binary_tree_sibling(binary_tree_t *node);
 binary_tree_t *binary_tree_uncle(binary_tree_t *node);
 binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second);
 int is_ancestor_path(const binary_tree_t *ancestor, const binary_tree_t *node);
+void binary_tree_level_traversal(const binary_tree_t *tree, size_t level, void (*func)(int));
+void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
+void binary_tree_is_complete_recursive(const binary_tree_t *tree,
+                int index, int num_nodes, int *is_complete);
+int binary_tree_is_complete(const binary_tree_t *tree);
+
 #endif /* _BINARY_TREES_H_ */
