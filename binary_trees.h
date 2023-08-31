@@ -20,6 +20,8 @@ typedef struct binary_tree_s
 	struct binary_tree_s *right;
 } binary_tree_t;
 
+typedef struct binary_tree_s bst_t;
+
 void binary_tree_print(const binary_tree_t *);
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
 binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value);
@@ -41,6 +43,7 @@ int binary_tree_is_full(const binary_tree_t *tree);
 int binary_tree_is_perfect(const binary_tree_t *tree);
 binary_tree_t *binary_tree_sibling(binary_tree_t *node);
 binary_tree_t *binary_tree_uncle(binary_tree_t *node);
+
 binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second);
 int is_ancestor_path(const binary_tree_t *ancestor, const binary_tree_t *node);
 void binary_tree_level_traversal(const binary_tree_t *tree, size_t level, void (*func)(int));
@@ -52,6 +55,8 @@ binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree);
 binary_tree_t *binary_tree_rotate_right(binary_tree_t *tree);
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
 int binary_tree_is_bst(const binary_tree_t *tree);
-int binary_tree_is_bst_helper(const binary_tree_t *tree, int *prev_value);
+int _binary_tree_is_bst_helper(const binary_tree_t *tree, int *prev_value);
+int binary_tree_is_bst_helper(const binary_tree_t *tree, int lower_bound, int upper_bound);
+bst_t *bst_insert(bst_t **tree, int value);
 
 #endif /* _BINARY_TREES_H_ */

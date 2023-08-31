@@ -2,28 +2,25 @@
 #include <limits.h>
 
 /**
- * binary_tree_is_bst_helper - checks if binary tree is a valid (BST).
- * @tree: A pointer to the root node of the tree to check.
- * @prev_value: A pointer to int variable that keeps track of previous value.
- * Return: 1 if tree is a valid BST, 0 otherwise.
+ * binary_tree_is_bst_helper - Check if a binary tree is a (BST)
+ * @tree: Pointer to the root of the binary tree
+ * @lower_bound: The lower bound for node values in the subtree
+ * @upper_bound: The upper bound for node values in the subtree
+ *
+ * @return: 1 if the tree is a valid BST, 0 otherwise.
  */
-int binary_tree_is_bst_helper(const binary_tree_t *tree, int *prev_value)
+int binary_tree_is_bst_helper(const binary_tree_t *tree,
+		int lower_bound, int upper_bound)
 {
 	if (tree == NULL)
 		return (1);
 
-	if (!binary_tree_is_bst_helper(tree->left, prev_value))
+	if (tree->n <= lower_bound || tree->n >= upper_bound)
 		return (0);
 
-	if (tree->n <= *prev_value)
-		return (0);
-
-	*prev_value = tree->n;
-
-	if (!binary_tree_is_bst_helper(tree->right, prev_value))
-		return (0);
-
-	return (1);
+	return (binary_tree_is_bst_helper(tree->left, lower_bound, tree->n) &&
+			binary_tree_is_bst_helper(tree->right, tree->n,
+				upper_bound));
 }
 
 /**
@@ -33,7 +30,5 @@ int binary_tree_is_bst_helper(const binary_tree_t *tree, int *prev_value)
  */
 int binary_tree_is_bst(const binary_tree_t *tree)
 {
-	int prev_value = INT_MIN;
-
-	return (binary_tree_is_bst_helper(tree, &prev_value));
+	return (binary_tree_is_bst_helper(tree, INT_MIN, INT_MAX));
 }
