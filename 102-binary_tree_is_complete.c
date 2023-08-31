@@ -52,11 +52,13 @@ void binary_tree_is_complete_recursive(const binary_tree_t *tree,
  */
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
+	int num_nodes = 0;
+        int is_complete = 0;
 	if (tree == NULL)
 		return (0);
 
-	int num_nodes = binary_tree_size(tree);
-	int is_complete = 1;
+	num_nodes = binary_tree_size(tree);
+	is_complete = 1;
 
 	binary_tree_is_complete_recursive(tree, 0, num_nodes, &is_complete);
 

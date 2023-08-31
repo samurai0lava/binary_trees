@@ -48,11 +48,13 @@ void binary_tree_level_traversal(const binary_tree_t *tree, size_t level, void (
  */
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
+	size_t height = 0;
+	size_t level = 0;
 	if (tree == NULL || func == NULL)
 		return;
 
-	size_t height = binary_tree_height(tree);
-	for (size_t level = 1; level <= height + 1; level++)
+	height = binary_tree_height(tree);
+	for (level = 1; level <= height + 1; level++)
 	{
 		binary_tree_level_traversal(tree, level, func);
 	}
